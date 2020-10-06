@@ -1,0 +1,110 @@
+{% extends "admin/base_site.html" %}
+
+{% block extrastyle %}
+<style>
+  :root {
+    --primary-color: #1d1d1b;
+    --primary-color-faded: #585853;
+    --secondary-color: #4dffba;
+  }
+
+  ::selection {
+    background: var(--secondary-color);
+    color:var(--primary-color);
+    opacity:1
+  }
+
+  ::-moz-selection {
+    background: var(--secondary-color);
+    color:var(--primary-color);
+    opacity:1
+  }
+ @font-face {
+    font-family: IRANSans;
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Black.eot?);
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Black.eot?&#iefix) format('embedded-opentype'), url(../../assets/admin/fonts/IRANSans/woff2/IRANSansWeb_Black.woff2?) format('woff2'), url(../../assets/admin/fonts/IRANSans/woff/IRANSansWeb_Black.woff?) format('woff'), url(../../assets/admin/fonts/IRANSans/ttf/IRANSansWeb_Black.ttf?) format('truetype');
+    font-weight: 900;
+    font-style: normal
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Bold.eot?);
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Bold.eot?&#iefix) format('embedded-opentype'), url(../../assets/admin/fonts/IRANSans/woff2/IRANSansWeb_Bold.woff2?) format('woff2'), url(../../assets/admin/fonts/IRANSans/woff/IRANSansWeb_Bold.woff?) format('woff'), url(../../assets/admin/fonts/IRANSans/ttf/IRANSansWeb_Bold.ttf?) format('truetype');
+    font-weight: 700;
+    font-style: normal
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Medium.eot?);
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Medium.eot?&#iefix) format('embedded-opentype'), url(../../assets/admin/fonts/IRANSans/woff2/IRANSansWeb_Medium.woff2?) format('woff2'), url(../../assets/admin/fonts/IRANSans/woff/IRANSansWeb_Medium.woff?) format('woff'), url(../../assets/admin/fonts/IRANSans/ttf/IRANSansWeb_Medium.ttf?) format('truetype');
+    font-weight: 500;
+    font-style: normal
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Light.eot?);
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_Light.eot?&#iefix) format('embedded-opentype'), url(../../assets/admin/fonts/IRANSans/woff2/IRANSansWeb_Light.woff2?) format('woff2'), url(../../assets/admin/fonts/IRANSans/woff/IRANSansWeb_Light.woff?) format('woff'), url(../../assets/admin/fonts/IRANSans/ttf/IRANSansWeb_Light.ttf?) format('truetype');
+    font-weight: 300;
+    font-style: normal
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_UltraLight.eot?);
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb_UltraLight.eot?&#iefix) format('embedded-opentype'), url(../../assets/admin/fonts/IRANSans/woff2/IRANSansWeb_UltraLight.woff2?) format('woff2'), url(../../assets/admin/fonts/IRANSans/woff/IRANSansWeb_UltraLight.woff?) format('woff'), url(../../assets/admin/fonts/IRANSans/ttf/IRANSansWeb_UltraLight.ttf?) format('truetype');
+    font-weight: 200;
+    font-style: normal
+}
+
+@font-face {
+    font-family: IRANSans;
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb.eot?);
+    src: url(../../assets/admin/fonts/IRANSans/eot/IRANSansWeb.eot?&#iefix) format('embedded-opentype'), url(../../assets/admin/fonts/IRANSans/woff2/IRANSansWeb.woff2?) format('woff2'), url(../../assets/admin/fonts/IRANSans/woff/IRANSansWeb.woff?) format('woff'), url(../../assets/admin/fonts/IRANSans/ttf/IRANSansWeb.ttf?) format('truetype');
+    font-weight: 400;
+    font-style: normal
+}
+ /* body {
+    font-family:Tahoma
+  }
+
+  td ,th {
+      font-family: Tahoma;
+  }
+  input, textarea, select, .form-row p, form .button{
+      font-family: Tahoma;
+  }*/
+
+  #header {
+    background: var(--primary-color);
+  }
+  .module h2, .module caption, .inline-group h2 {
+    background-color: var(--primary-color-faded);
+  }
+  div.breadcrumbs {
+    background: var(--primary-color-faded);
+  }
+  a:link, a:visited {
+    color: var(--primary-color-faded);
+  }
+  .selector-chosen h2 {
+    background: var(--primary-color-faded) !important;
+  }
+  .button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: var(--primary-color-faded);
+  }
+  .button.default, input[type=submit].default, .submit-row input.default {
+    background: var(--primary-color);
+  }
+  .button:active, input[type=submit]:active, input[type=button]:active, .button:focus, input[type=submit]:focus, input[type=button]:focus, .button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: var(--primary-color-faded);
+    opacity: 0.8;
+  }
+  .button.default:active, input[type=submit].default:active, .button.default:focus, input[type=submit].default:focus, .button.default:hover, input[type=submit].default:hover {
+    background: var(--primary-color);
+    opacity: 0.8;
+  }
+</style>
+{% endblock %}

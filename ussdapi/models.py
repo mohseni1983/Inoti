@@ -18,6 +18,10 @@ class ussd_call(models.Model):
 
     def __str__(self):
         return ('{}  -  {}  -  {}  -  {}'.format(self.session_id, self.mobile, self.call, self.date_time))
+class ussd_call_admin(admin.ModelAdmin):
+    list_display = ['session_id','date_time','mobile','call']
+    search_fields = ['mobile']
+    date_hierarchy = 'date_time'
 
 
 class ussd_command(models.Model):

@@ -3,6 +3,7 @@
 */
 
 @import url(fonts.css);
+@import "../fonts/IRANSans/stylesheet.css";
 
 html, body {
     height: 100%;
@@ -13,7 +14,7 @@ body {
     padding: 0;
     font-size: 14px;
     /*font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;*/
-    font-family: Tahoma;
+    font-family: IRANSans;
     color: #333;
     background: #fff;
 }
@@ -225,7 +226,8 @@ td, th {
     border-bottom: 1px solid #eee;
     vertical-align: top;
     padding: 8px;
-    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    /*font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;*/
+    font-family: IRANSans;
 }
 
 th {
@@ -386,7 +388,8 @@ input, textarea, select, .form-row p, form .button {
     margin: 2px 0;
     padding: 2px 3px;
     vertical-align: middle;
-    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    /*font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;*/
+    font-family: IRANSans;
     font-weight: normal;
     font-size: 13px;
 }
