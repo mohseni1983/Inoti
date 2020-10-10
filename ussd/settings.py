@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.conf.global_settings import SECURE_HSTS_SECONDS
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -23,7 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '#wg$&6yhnz$*%5c@ax!b!pg_ac_k(beg$ctm(u3sjt+*vy(#uh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+SESSION_COOKIE_SECURE=True
+#SECURE_HSTS_SECONDS-True
 
 ALLOWED_HOSTS = ['98fd51932cce.ngrok.io','localhost','127.0.0.1','sharp-cobra-51.loca.lt','*']
 
