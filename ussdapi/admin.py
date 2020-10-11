@@ -5,3 +5,5 @@ from . import models
 admin.site.register(models.ussd_call,models.ussd_call_admin)
 admin.site.register(models.ussd_command,models.ussd_command_admin)
 admin.site.register(models.ussd_command_type)
+admin.site.register(models.Campaign,models.Campaign_admin)
+admin.site.register(models.Donation,models.donation_admin)
