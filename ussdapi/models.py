@@ -138,12 +138,8 @@ class Donation(models.Model):
     card_no = models.CharField(max_length=20, verbose_name='شماره کارت', blank=True, null=True)
     transaction_id = models.CharField(max_length=50, verbose_name='شناسه بانک', blank=True, null=True)
 
-    def _get_unique(self):
-        return uuid.uuid4().hex[:6].upper()
-
-    _get_unique.short_description = 'شناسه یکتای اینترنتی'
-
-    unique_url_code = property(_get_unique)
+    unique_url_code = models.CharField(max_length=6, default=uuid.uuid4().hex[:6].upper(),
+                                       verbose_name='شناسه یکتای اینترنتی')
     payment_gateway = models.CharField(max_length=30, verbose_name='درگاه پرداخت', null=True, blank=True)
 
     class Meta:
