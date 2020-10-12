@@ -1,0 +1,7 @@
+@import "../admin/fonts/IRANSans/stylesheet.css";
+body {
+
+    margin-top: 50px;
+    font-family: IRANSans;
+    background-color: #d6d8d9;
+}

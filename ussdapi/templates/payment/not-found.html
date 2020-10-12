@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>پرداخت نامعتبر</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap-rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <img class="d-block mx-auto" src="{% static 'images/logo.png' %}" width="250">
+            <hr>
+            <h3 class="text-center text-black-50">بنیاد خیریه نیکوکاران شریف</h3>
+            <hr>
+            <h4 class="text-center text-danger">آدرس لینک پرداخت ارسالی شده اشتباه است</h4>
+            <br>
+            <a href="https://www.sharifngo.com"  class="btn btn-success btn-block btn-lg">وب سایت بنیاد نیکوکاران شریف</a>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/bootstrap.js' %}" ></script>
+</body>
+</html>

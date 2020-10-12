@@ -10,9 +10,12 @@ def payment(request, payid):
     result=Donation.objects.filter(unique_url_code=payid)
     if result.count() > 0:
         fresult=result.first()
-        return HttpResponse(fresult.amount)
+        context={
+            'data':fresult
+        }
+        return render(request,'payment/payment.html',context)
     return HttpResponse('Payment Page '+payid)
 
 
 def notfound(request):
-    return HttpResponse('Not Found')
+    return render(request,'payment/not-found.html',{})

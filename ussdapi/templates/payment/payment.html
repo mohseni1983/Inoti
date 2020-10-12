@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>حمایت مالی</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap-rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <img class="mx-auto d-block " src="{% static 'images/logo.png' %}" alt="لوگوی نیکوکاران شریف" width="250">
+            <hr>
+            <h4 class="text-center">
+                درگاه پرداخت اینترنتی
+
+            </h4>
+            <h2 class="text-center">بنیاد خیریه نیکوکاران شریف</h2>
+            <hr>
+            <div class="card" style="padding: 25px">
+                <form>
+                    <div class="form-group">
+                                            <label for="amount" class="label">مبلغ حمایت</label>
+                    <input type="text" name="amount" class="form-control" placeholder="مبلغ"
+                           value="{{ data.amount }}" readonly="true">
+                    <small id="num2persian"></small>
+
+                    </div>
+                    <div class="form-group">
+                                            <label for="mobile" class="label">شماره همراه</label>
+                    <input type="text" value="{{ data.mobile }}" class="form-control" readonly="true">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="label">نام و نام خانوادگی (اختیاری)</label>
+                        <input class="form-control" type="text" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="label">پست الکترونیک (اختیاری)</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-lg btn-block btn-success" value="انتقال به درگاه بانک سامان">
+
+
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+</div>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/num2persian-min.js' %}"></script>
+<script>
+    document.getElementById('num2persian').innerText = 'مبلغ حمایت به حروف: ' +
+    {{ data.amount }}.toPersianLetter() + ' ریال';
+</script>
+</body>
+</html>

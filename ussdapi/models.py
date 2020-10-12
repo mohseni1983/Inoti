@@ -132,7 +132,7 @@ class Donation(models.Model):
     session_id = models.CharField(max_length=150, verbose_name='شناسه نشست')
     mobile = models.CharField(max_length=20, verbose_name='شماره موبایل')
     campaing = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING, verbose_name='کمپین', null=True, blank=True)
-    amount = models.FloatField(verbose_name='مقدار حمایت')
+    amount = models.FloatField(verbose_name='مقدار حمایت',null=True,blank=True)
     bill_id = models.CharField(max_length=30, verbose_name='شناسه قبض', null=True, blank=True)
     bill_no = models.CharField(max_length=30, verbose_name='شناسه پرداخت', null=True, blank=True)
     card_no = models.CharField(max_length=20, verbose_name='شماره کارت', blank=True, null=True)
