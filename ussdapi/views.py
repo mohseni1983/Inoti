@@ -72,7 +72,7 @@ def api(request):
                     #message=message+'مبلغ: {} ریال'.format(amount)
                     #message=message+'<br> آدرس اینترنتی پرداخت'
                     #message=message+request.build_absolute_uri()
-                    message=message+'پیامکی حاوی دیگر روش های پرداخت برای شما ارسال شده است<br>'
+                    #message=message+'https://sharifngo.com'
                     #---------------------------
                     cmpn=None
                     if type==CommandType.کمپین.value:
@@ -82,18 +82,25 @@ def api(request):
                         cmd_index=ussd_cmd.rfind('*')
                         cmd=ussd_cmd[cmd_index+1:]
                         #print
-                        cmd_obj=ussd_command.objects.filter(command_id=int(cmd))
+                        cmd_obj=ussd_command.objects.filter(command_id=int(cmd)).filter(command_type=CommandType.کمپین).first()
+                        if cmd_obj.campaign is not None:
+                            cmpn=cmd_obj.campaign
+
+
                         #print(cmd_obj.first())
-                        cmd_obj_first=cmd_obj.first()
-                        campaing=getattr(cmd_obj_first,'campaign')
-                        print(campaing)
-                        cmpn=cmd_obj_first.campaign
+                        #cmd_obj_first=cmd_obj.first()
+                        #campaing=cmd_obj_first.campaign.title+'*********'
+                        #print(campaing)
+                        #cmpn=cmd_obj_first.campaign
 
                     #---------------------------
 
                     donation=Donation(mobile=mobile,amount=amount,bill_id=shenase_response['billId'],bill_no=shenase_response['paymentId'],session_id=session_id,campaing=cmpn)
                     donation.save()
+                    message=message+request.get_host()+'/'+donation.unique_url_code
                     #print(amount)
+    #print(request.get_host())
+
     return HttpResponse(message)
 
 #def add_donation(session_id,mobile,amount):
