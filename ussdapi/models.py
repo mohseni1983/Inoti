@@ -2,7 +2,7 @@ from datetime import datetime
 from enum import IntEnum
 import uuid
 from django.db import models
-from django_jalali.db import models as jmodels
+from django_jalali.db import models as jmodel
 from django.contrib import admin
 from django.db import models
 
@@ -45,7 +45,7 @@ class ussd_call(models.Model):
     call = models.CharField(max_length=80, verbose_name='کد ارسالی')
     mobile = models.CharField(max_length=15, verbose_name='شماره همراه')
     session_id = models.CharField(max_length=50, verbose_name='شناسه نشست')
-    date_time = models.DateTimeField(default=datetime.now(), verbose_name='ژمان ارسال')
+    date_time = jmodel.jDateTimeField(default=datetime.now(), verbose_name='ژمان ارسال')
     command_type = models.IntegerField(choices=CommandType.choice(), default=CommandType.هیچکدام,
                                        verbose_name='نوع منو')
 
@@ -126,9 +126,9 @@ class USSDRequest:
 
 # Data model for donations
 class Donation(models.Model):
-    creation_date = models.DateTimeField(verbose_name='تاریخ ایجاد', default=datetime.now())
+    creation_date = jmodel.jDateTimeField(verbose_name='تاریخ ایجاد', default=datetime.now())
     payment_status = models.BooleanField(verbose_name='وضعیت پرداخت', default=False)
-    payment_date = models.DateTimeField(verbose_name='تاریخ پرداخت', null=True, blank=True)
+    payment_date = jmodel.jDateTimeField(verbose_name='تاریخ پرداخت', null=True, blank=True)
     session_id = models.CharField(max_length=150, verbose_name='شناسه نشست')
     mobile = models.CharField(max_length=20, verbose_name='شماره موبایل')
     campaing = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING, verbose_name='کمپین', null=True, blank=True)
@@ -153,3 +153,26 @@ class donation_admin(admin.ModelAdmin):
                     'card_no', 'unique_url_code']
     search_fields = ['mobile', 'transaction_id', 'card_no', 'unique_url_code']
     list_filter = ['creation_date', 'payment_status', 'payment_date', 'mobile', 'campaing']
+
+# SMS model
+class sms_inbox(models.Model):
+    message_id=models.CharField(max_length=20,verbose_name='شناسه پیام')
+    sender=models.CharField(max_length=30,verbose_name='شماره درگاه')
+    receptor=models.CharField(max_length=15,verbose_name='شماره مخاطب')
+    date =jmodel.jDateTimeField(verbose_name='تاریخ ارسال')
+    message=models.TextField(verbose_name='متن پیام')
+    status=models.IntegerField(verbose_name='کد وضعیت')
+    status_text=models.CharField(verbose_name='متن وضعیت',max_length=20)
+    cost=models.FloatField(verbose_name='هزینه پیامک')
+
+    class Meta:
+        verbose_name_plural='لیست پیامک های ارسالی'
+        verbose_name='لیست پیامک های ارسالی'
+    def __str__(self):
+        return '{} --- {}'.format(self.receptor,self.date)
+
+# SMS Admin model
+class sms_inbox_admin(admin.ModelAdmin):
+    list_display = ['date','receptor','sender','status','status_text']
+    search_fields = ['receptor','date']
+    list_filter = ['status_text']

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import locale
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.conf.global_settings import SECURE_HSTS_SECONDS
@@ -120,7 +121,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
