@@ -24,7 +24,8 @@
             <h2 class="text-center">بنیاد خیریه نیکوکاران شریف</h2>
             <hr>
             <div class="card" style="padding: 25px">
-                <form>
+                <form method="post">
+                    {% csrf_token %}
                     <div class="form-group">
                                             <label for="amount" class="label">مبلغ حمایت</label>
                     <input type="text" name="amount" class="form-control" placeholder="مبلغ"
@@ -34,7 +35,7 @@
                     </div>
                     <div class="form-group">
                                             <label for="mobile" class="label">شماره همراه</label>
-                    <input type="text" value="{{ data.mobile }}" class="form-control" readonly="true">
+                    <input type="text" name="mobile" value="{{ data.mobile }}" class="form-control" readonly="true">
 
                     </div>
                     <div class="form-group">

@@ -136,10 +136,11 @@ class Donation(models.Model):
     bill_id = models.CharField(max_length=30, verbose_name='شناسه قبض', null=True, blank=True)
     bill_no = models.CharField(max_length=30, verbose_name='شناسه پرداخت', null=True, blank=True)
     card_no = models.CharField(max_length=20, verbose_name='شماره کارت', blank=True, null=True)
-    transaction_id = models.CharField(max_length=50, verbose_name='شناسه بانک', blank=True, null=True)
+    transaction_id = models.CharField(max_length=50, verbose_name='شناسه تراکنش', blank=True, null=True)
+    digital_id=models.CharField(max_length=500,verbose_name='رسید دیجیتالی',blank=True,null=True,unique=True)
 
     unique_url_code = models.CharField(max_length=6, default=uuid.uuid4().hex[:6].upper(),
-                                       verbose_name='شناسه یکتای اینترنتی')
+                                       verbose_name='شناسه یکتای اینترنتی',unique=True)
     payment_gateway = models.CharField(max_length=30, verbose_name='درگاه پرداخت', null=True, blank=True)
 
     class Meta:

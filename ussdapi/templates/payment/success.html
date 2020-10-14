@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap-rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <img class="mx-auto d-block " src="{% static 'images/logo.png' %}" alt="لوگوی نیکوکاران شریف" width="250">
+            <hr>
+            <h2 class="text-center">بنیاد خیریه نیکوکاران شریف</h2>
+            <hr>
+            <div class="card" style="padding: 25px">
+                <h2 class="text-center" style="font-family: IRANSans">از حمایت شما سپاسگذاریم</h2>
+                <hr>
+                <table class="table">
+                    <tr>
+                        <td scope="row">شناسه پیگیری</td>
+                        <td>{{ transaction_id }}</td>
+                    </tr>
+                    <tr>
+                        <td scope="row">
+                            رسید دیجیتالی
+                        </td>
+                        <td>
+                            {{ digital_id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">
+                            مبلغ
+                        </td>
+                        <td>
+                            {{ amount }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">
+                            تاریخ
+                        </td>
+                        <td>
+                            {{ date }}
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+</div>
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+
+</body>
+</html>
