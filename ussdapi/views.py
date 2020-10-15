@@ -131,11 +131,13 @@ def api(request):
                                         bill_no=shenase_response['paymentId'], session_id=session_id, campaing=cmpn)
                     donation.save()
 
-                    sms_message = 'بنیاد نیکوکاران شریف\r\n'
-                    sms_message = sms_message + '\r\n با مشخصات ذیل می توانید از درگاه بانک های ملت،شهر،انصار،پاسارگاد پرداخت کنید:'
-                    sms_message = sms_message + 'شناسه قبض: {} \r\n'.format(shenase_response['billId'])
-                    sms_message = sms_message + 'شناسه پرداخت: {} \r\n'.format(shenase_response['paymentId'])
-                    sms_message = sms_message + 'مبلغ: {} ریال'.format(int(amount))
+                    sms_message = 'بنیاد نیکوکاران شریف'+'\r\n'
+                    sms_message = sms_message + ' با مشخصات قبض ذیل می توانید از درگاه بانک های ملت،شهر،انصار،پاسارگاد پرداخت کنید:'+'\r\n'
+                    sms_message = sms_message + 'شناسه قبض: {}'.format(shenase_response['billId'])+'\r\n'
+                    sms_message = sms_message + 'شناسه پرداخت: {}'.format(shenase_response['paymentId'])+'\r\n'
+                    sms_message = sms_message + 'مبلغ: {} ریال'.format(int(amount))+'\r\n'
+                    sms_message = sms_message + 'پرداخت با درگاه اینترنتی از طریق آدرس زیر:'+'\r\n'
+                    sms_message = sms_message + request.get_host()+'/'+donation.unique_url_code
                     #sms_message = sms_message + '\r\nپرداخت مستقیم با USSD'
                     #sms_message = sms_message + '\r\n *720*3*2*{}*{}#'.format(shenase_response['billId'],
                     #                                                          shenase_response['paymentId'])
