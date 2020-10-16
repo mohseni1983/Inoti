@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 import requests
 from kavenegar import *
@@ -127,8 +128,9 @@ def api(request):
 
                     # ---------------------------
 
+                    random_str=uuid.uuid4().hex[:6].upper()
                     donation = Donation(mobile=mobile, amount=amount, bill_id=shenase_response['billId'],
-                                        bill_no=shenase_response['paymentId'], session_id=session_id, campaing=cmpn)
+                                        bill_no=shenase_response['paymentId'], session_id=session_id, campaing=cmpn,unique_url_code=random_str)
                     donation.save()
 
                     sms_message = 'بنیاد نیکوکاران شریف'+'\r\n'
