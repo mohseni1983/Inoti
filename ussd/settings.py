@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'jalali_date',
     'ussdapi',
 ]
 
@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'ussd.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ussd',
+        'NAME': 'inoti_db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'PORT': '3307',
     }
 }
 
@@ -111,13 +111,38 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# defaults
+JALALI_DATE_DEFAULTS = {
+   'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            # loading datepicker
+            'admin/js/django_jalali.min.js',
+            # OR
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
+            # 'admin/js/main.js',
+        ],
+        'css': {
+            'all': [
+                'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+            ]
+        }
+    },
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'fa-IR'
 
-TIME_ZONE = 'Asia/Tehran'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

@@ -8,6 +8,10 @@ from django.db import models
 
 
 # Data model for Campaigns
+from jalali_date import datetime2jalali
+from jalali_date.admin import TabularInlineJalaliMixin, StackedInlineJalaliMixin, ModelAdminJalaliMixin
+
+
 class Campaign(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان کمپین')
     short_title = models.CharField(max_length=30, verbose_name='عنوان کوتاه')
@@ -45,7 +49,7 @@ class ussd_call(models.Model):
     call = models.CharField(max_length=80, verbose_name='کد ارسالی')
     mobile = models.CharField(max_length=15, verbose_name='شماره همراه')
     session_id = models.CharField(max_length=50, verbose_name='شناسه نشست')
-    date_time = jmodel.jDateTimeField(default=datetime.now(), verbose_name='ژمان ارسال')
+    date_time = models.DateTimeField(auto_now_add=True, verbose_name='زمان ارسال')
     command_type = models.IntegerField(choices=CommandType.choice(), default=CommandType.هیچکدام,
                                        verbose_name='نوع منو')
 
@@ -57,12 +61,15 @@ class ussd_call(models.Model):
         return ('{}  -  {}  -  {}  -  {}'.format(self.session_id, self.mobile, self.call, self.date_time))
 
 
-# ussd_call Admin class
-class ussd_call_admin(admin.ModelAdmin):
-    list_display = ['session_id', 'date_time', 'mobile', 'call', 'command_type']
+class ussd_call_admin(ModelAdminJalaliMixin,admin.ModelAdmin):
+    list_display = ['session_id', 'get_jalali_date', 'mobile', 'call', 'command_type']
     search_fields = ['mobile']
     list_filter = ['command_type']
     date_hierarchy = 'date_time'
+    def get_jalali_date(self,obj):
+        return datetime2jalali(obj.date_time).strftime('%y/%m/%d - %H:%M:%S')
+    get_jalali_date.short_description = 'زمان ارسال'
+    get_jalali_date.admin_order_field='date_time'
 
 
 # Data Model for USSD Commands
@@ -126,9 +133,9 @@ class USSDRequest:
 
 # Data model for donations
 class Donation(models.Model):
-    creation_date = jmodel.jDateTimeField(verbose_name='تاریخ ایجاد', default=datetime.now())
+    creation_date = models.DateTimeField(verbose_name='تاریخ ایجاد', auto_now_add=True)
     payment_status = models.BooleanField(verbose_name='وضعیت پرداخت', default=False)
-    payment_date = jmodel.jDateTimeField(verbose_name='تاریخ پرداخت', null=True, blank=True)
+    payment_date = models.DateTimeField(verbose_name='تاریخ پرداخت', null=True, blank=True)
     session_id = models.CharField(max_length=150, verbose_name='شناسه نشست')
     mobile = models.CharField(max_length=20, verbose_name='شماره موبایل')
     campaing = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING, verbose_name='کمپین', null=True, blank=True)
@@ -160,7 +167,7 @@ class sms_inbox(models.Model):
     message_id=models.CharField(max_length=20,verbose_name='شناسه پیام')
     sender=models.CharField(max_length=30,verbose_name='شماره درگاه')
     receptor=models.CharField(max_length=15,verbose_name='شماره مخاطب')
-    date =jmodel.jDateTimeField(verbose_name='تاریخ ارسال')
+    date =models.DateTimeField(verbose_name='تاریخ ارسال')
     message=models.TextField(verbose_name='متن پیام')
     status=models.IntegerField(verbose_name='کد وضعیت')
     status_text=models.CharField(verbose_name='متن وضعیت',max_length=20)
